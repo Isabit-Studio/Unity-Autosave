@@ -20,10 +20,6 @@ using UnityEditor.PackageManager.Requests;
 [InitializeOnLoad]
 public class Autosave : EditorWindow
 {
-    static string descriptionText = "Autosave requires the Editor Coroutines package to be installed." +
-        "\nPlease ensure the Editor Coroutines package in installed in the Package Manager,"
-        +"\nor click the button below to Install or Update it.";
-
     static string infoText = "After changing Autosave Settings, Please make sure to click Update Interval!";
 
     static int saveInterval = 10;
@@ -65,14 +61,6 @@ public class Autosave : EditorWindow
 
     private void OnGUI()
     {
-        EditorGUILayout.BeginVertical();
-        EditorGUILayout.HelpBox(descriptionText, MessageType.Info);
-        if (GUILayout.Button("Install/Update Editor Coroutines Package"))
-        {
-            InstallEditorCoroutines();
-        }
-        EditorGUILayout.EndVertical();
-
         showSettings = EditorGUILayout.BeginFoldoutHeaderGroup(showSettings, "Autosave Settings");
         if (showSettings)
         {
@@ -101,25 +89,6 @@ public class Autosave : EditorWindow
             Debug.Log("Saved open scenes at: " + System.DateTime.Now);
             SavePrefs();
         }
-
-        // Tests for saving and loading Autsave Prefs from scriptable Object.
-
-        //if (GUILayout.Button("Load Prefs"))
-        //{
-
-        //    loadPrefs();
-        //    if (saveRoutine != null) EditorCoroutineUtility.StopCoroutine(saveRoutine);
-        //    saveRoutine = EditorCoroutineUtility.StartCoroutineOwnerless(SaveOpenScenesCoroutine());
-
-        //}
-
-
-        //if (GUILayout.Button("Save Prefs"))
-        //{
-        //    savePrefs();
-        //    if (saveRoutine != null) EditorCoroutineUtility.StopCoroutine(saveRoutine);
-        //    saveRoutine = EditorCoroutineUtility.StartCoroutineOwnerless(SaveOpenScenesCoroutine());
-        //}
 
         EditorGUILayout.EndHorizontal();
 
@@ -223,14 +192,6 @@ public class Autosave : EditorWindow
 
 
     }
-
-    void InstallEditorCoroutines() {
-
-        Client.Add("com.unity.editorcoroutines");
-        Debug.Log("Installing/Updating Editor Coroutines.");
-    
-    }
-
 }
 
 
